@@ -29,8 +29,8 @@
         </div>
 
         <div class="action-grid">
-            <button class="btn btn-encrypt" onclick="processCrypto('encrypt')">Encrypt Asset</button>
-            <button class="btn btn-decrypt" onclick="processCrypto('decrypt')">Decrypt Asset</button>
+            <button class="btn btn-encrypt" onclick="event.preventDefault(); processCrypto('encrypt')">Encrypt Asset</button>
+            <button class="btn btn-decrypt" onclick="event.preventDefault(); processCrypto('decrypt')">Decrypt Asset</button>
         </div>
 
         <div class="console-log" id="consoleLog">> System idling. Awaiting payload injection...</div>
