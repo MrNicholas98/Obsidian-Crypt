@@ -1,0 +1,191 @@
+:root {
+    --bg-primary: #0a0b0d;
+    --bg-secondary: #12141c;
+    --accent-glow: #00ffcc;
+    --accent-dim: #00aa88;
+    --text-main: #e2e8f0;
+    --text-muted: #64748b;
+    --border-color: #1e293b;
+    --danger-glow: #ff3366;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: var(--bg-primary);
+    color: var(--text-main);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+.vault-container {
+    width: 100%;
+    max-width: 550px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 2.5rem;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7), 0 0 30px rgba(0, 255, 204, 0.05);
+    transition: all 0.3s ease;
+}
+
+.vault-container:hover {
+    border-color: rgba(0, 255, 204, 0.3);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8), 0 0 40px rgba(0, 255, 204, 0.1);
+}
+
+.vault-header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+}
+
+.vault-header h1 {
+    font-size: 2rem;
+    font-weight: 800;
+    letter-spacing: 2px;
+    color: var(--text-main);
+    text-transform: uppercase;
+}
+
+.vault-header h1 span {
+    color: var(--accent-glow);
+    text-shadow: 0 0 10px rgba(0, 255, 204, 0.5);
+}
+
+.vault-header p {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-top: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.input-group {
+    margin-bottom: 1.5rem;
+}
+
+.input-group label {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.file-drop-zone {
+    border: 2px dashed var(--border-color);
+    border-radius: 10px;
+    padding: 2rem;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.01);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.file-drop-zone:hover {
+    border-color: var(--accent-glow);
+    background: rgba(0, 255, 204, 0.02);
+}
+
+.file-drop-zone p {
+    font-size: 0.9rem;
+    color: var(--text-main);
+}
+
+.file-drop-zone span {
+    display: block;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-top: 0.5rem;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+input[type="password"] {
+    width: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--border-color);
+    padding: 0.85rem 1rem;
+    border-radius: 8px;
+    color: #ffffff;
+    font-size: 1rem;
+    outline: none;
+    transition: all 0.2s ease;
+}
+
+input[type="password"]:focus {
+    border-color: var(--accent-glow);
+    box-shadow: 0 0 10px rgba(0, 255, 204, 0.1);
+}
+
+.action-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.btn {
+    padding: 0.9rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.2s ease;
+    outline: none;
+}
+
+.btn-encrypt {
+    background: transparent;
+    border: 1px solid var(--accent-glow);
+    color: var(--accent-glow);
+}
+
+.btn-encrypt:hover {
+    background: var(--accent-glow);
+    color: var(--bg-primary);
+    box-shadow: 0 0 15px rgba(0, 255, 204, 0.4);
+}
+
+.btn-decrypt {
+    background: transparent;
+    border: 1px solid var(--danger-glow);
+    color: var(--danger-glow);
+}
+
+.btn-decrypt:hover {
+    background: var(--danger-glow);
+    color: var(--text-main);
+    box-shadow: 0 0 15px rgba(255, 33, 102, 0.4);
+}
+
+.console-log {
+    margin-top: 2rem;
+    background: #050608;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 1rem;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.8rem;
+    min-height: 60px;
+    max-height: 120px;
+    overflow-y: auto;
+    color: #8492a6;
+}
+
+.log-success { color: #00ffcc; }
+.log-error { color: #ff3366; }

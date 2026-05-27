@@ -1,31 +1,86 @@
-Obsidian Crypt // Secure File Vault
-    
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Obsidian Crypt // Secure File Vault</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
+    <div class="vault-container">
+        <div class="vault-header">
+            <h1>Obsidian <span>Crypt</span></h1>
+            <p>Military-Grade AES-256 File Vault</p>
+        </div>
 
+        <div class="input-group">
+            <label>Target Asset</label>
+            <div class="file-drop-zone" id="dropZone" onclick="document.getElementById('fileInput').click()">
+                <p id="fileNameDisplay">Select or drop target file...</p>
+                <span>Supports any raw file architecture</span>
+            </div>
+            <input type="file" id="fileInput" onchange="updateFileName()">
+        </div>
 
-    
-        
-            Obsidian Crypt
-            Military-Grade AES-256 File Vault
-        
+        <div class="input-group">
+            <label>Master Passphrase</label>
+            <input type="password" id="passwordInput" placeholder="••••••••••••••••">
+        </div>
 
-        
-            Target Asset
-            
-                Select or drop target file...
-                Supports any raw file architecture
-            
-            
-        
+        <div class="action-grid">
+            <button class="btn btn-encrypt" onclick="processCrypto('encrypt')">Encrypt Asset</button>
+            <button class="btn btn-decrypt" onclick="processCrypto('decrypt')">Decrypt Asset</button>
+        </div>
 
-        
-            Master Passphrase
-            
-        
+        <div class="console-log" id="consoleLog">> System idling. Awaiting payload injection...</div>
+    </div>
 
-        
-            Encrypt Asset
-            Decrypt Asset
-        
+    <script>
+        const BACKEND_URL = "http://127.0.0.1:8000";
 
-        > System idling. Awaiting payload injection...
+        function updateFileName() {
+            const input = document.getElementById('fileInput');
+            const display = document.getElementById('fileNameDisplay');
+            if(input.files.length > 0) {
+                display.innerText = input.files[0].name;
+                display.style.color = "#00ffcc";
+            }
+        }
+
+        async function processCrypto(action) {
+            const fileInput = document.getElementById('fileInput');
+            const passwordInput = document.getElementById('passwordInput');
+            const consoleLog = document.getElementById('consoleLog');
+
+            if (fileInput.files.length === 0 || !passwordInput.value) {
+                consoleLog.innerHTML = `<span class="log-error">> System Abort: Missing target file or master passphrase.</span>`;
+                return;
+            }
+
+            consoleLog.innerHTML = `> Initializing cryptographic pipeline for ${action}...`;
+
+            const formData = new FormData();
+            formData.append("file", fileInput.files[0]);
+            formData.append("password", passwordInput.value);
+
+            try {
+                const response = await fetch(`${BACKEND_URL}/${action}`, {
+                    method: "POST",
+                    body: formData
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    consoleLog.innerHTML = `<span class="log-success">> Success: ${result.message}<br>> Action: ${result.filename} generated securely in vault_temp folder.</span>`;
+                } else {
+                    consoleLog.innerHTML = `<span class="log-error">> Server Exception: ${result.detail}</span>`;
+                }
+            } catch (error) {
+                consoleLog.innerHTML = `<span class="log-error">> Network Error: Unable to bridge connection to FastAPI secure gateway.</span>`;
+            }
+        }
+    </script>
+</body>
+</html>
